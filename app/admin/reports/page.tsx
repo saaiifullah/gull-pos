@@ -1,11 +1,18 @@
-import { SectionPage } from "@/components/admin/section-page";
+import { Suspense } from "react";
+import { Reports } from "@/components/admin/reports";
+
+const ReportsFallback = () => {
+  return (
+    <div className="mx-auto w-full max-w-[1530px] px-4 py-6 md:px-8 md:py-8">
+      <p className="text-sm text-muted">Loading reports…</p>
+    </div>
+  );
+};
 
 export default function ReportsPage() {
   return (
-    <SectionPage
-      eyebrow="MODEHAUS OPERATIONS"
-      title="Reports"
-      description="Stock, sales, and shop-balance reports will be generated from live data."
-    />
+    <Suspense fallback={<ReportsFallback />}>
+      <Reports />
+    </Suspense>
   );
 }
