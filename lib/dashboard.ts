@@ -2,8 +2,7 @@ import "server-only";
 
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/auth";
-
-type Unit = "m" | "pcs";
+import { formatQuantity, readQuantity, type Unit } from "@/lib/quantities";
 
 type BalanceRow = {
   item_id: string;
@@ -103,11 +102,6 @@ const emptyDashboard: DashboardData = {
   dispatches: [],
 };
 
-const readQuantity = (value: number | string | null | undefined) => {
-  const parsed = typeof value === "number" ? value : Number(value);
-  return Number.isFinite(parsed) ? parsed : 0;
-};
-
 const readName = (value: Named | Named[] | null | undefined, fallback: string) => {
   if (!value) return fallback;
   const named = Array.isArray(value) ? value[0] : value;
@@ -116,11 +110,6 @@ const readName = (value: Named | Named[] | null | undefined, fallback: string) =
 
 const formatCount = (value: number) => {
   return new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(value);
-};
-
-const formatQuantity = (value: number, unit: Unit) => {
-  const suffix = unit === "m" ? "m" : "pcs";
-  return `${formatCount(value)} ${suffix}`;
 };
 
 const formatRupees = (amount: number) => {
