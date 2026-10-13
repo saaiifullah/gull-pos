@@ -1,11 +1,18 @@
-import { SectionPage } from "@/components/admin/section-page";
+import { Suspense } from "react";
+import { Dashboard } from "@/components/admin/dashboard";
+
+const DashboardFallback = () => {
+  return (
+    <div className="mx-auto w-full max-w-[1530px] px-4 py-6 md:px-8 md:py-8">
+      <p className="text-sm text-muted">Loading dashboard…</p>
+    </div>
+  );
+};
 
 export default function DashboardPage() {
   return (
-    <SectionPage
-      eyebrow="DISTRIBUTION HQ"
-      title="Dashboard"
-      description="The live numbers, stock chart, and quick purchase, production, and dispatch flow arrive in the next phases. This shell is signed in and ready."
-    />
+    <Suspense fallback={<DashboardFallback />}>
+      <Dashboard />
+    </Suspense>
   );
 }
