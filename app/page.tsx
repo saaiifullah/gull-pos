@@ -10,12 +10,20 @@ export default function Home() {
           The admin workspace is open. Inventory, production, and the customer shop are added in
           later phases.
         </p>
-        <Link
-          href="/login"
-          className="mt-8 inline-flex h-11 items-center rounded-[9px] bg-accent px-5 text-sm font-semibold text-white hover:bg-[#2448c6]"
-        >
-          Open admin
-        </Link>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/login"
+            className="inline-flex h-11 items-center rounded-[9px] bg-accent px-5 text-sm font-semibold text-white hover:bg-[#2448c6]"
+          >
+            Sign in
+          </Link>
+          <Link
+            href="/signup"
+            className="inline-flex h-11 items-center rounded-[9px] border border-line bg-white px-5 text-sm font-semibold text-ink"
+          >
+            Create account
+          </Link>
+        </div>
       </section>
     </main>
   );

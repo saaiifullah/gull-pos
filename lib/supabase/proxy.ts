@@ -53,7 +53,7 @@ export const updateSession = async (request: NextRequest) => {
     return copyAuthHeaders(supabaseResponse, NextResponse.redirect(url));
   }
 
-  if (isSignedIn && pathname === "/login") {
+  if (isSignedIn && (pathname === "/login" || pathname === "/signup")) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin";
     url.search = "";
