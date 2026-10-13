@@ -2,7 +2,7 @@ import "server-only";
 
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/auth";
-import { formatQuantity, readQuantity, type Unit } from "@/lib/quantities";
+import { formatDate, formatQuantity, formatRupees, readQuantity, type Unit } from "@/lib/quantities";
 
 type BalanceRow = {
   item_id: string;
@@ -110,22 +110,6 @@ const readName = (value: Named | Named[] | null | undefined, fallback: string) =
 
 const formatCount = (value: number) => {
   return new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(value);
-};
-
-const formatRupees = (amount: number) => {
-  const shown = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(amount);
-  return `Rs ${shown}`;
-};
-
-const formatDate = (value: string | null) => {
-  if (!value) return "No date";
-  const [year, month, day] = value.slice(0, 10).split("-").map(Number);
-  if (!year || !month || !day) return value;
-  return new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(year, month - 1, day));
 };
 
 const labelFor = (labels: Record<string, string>, value: string) => {
